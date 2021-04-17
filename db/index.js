@@ -56,7 +56,7 @@ async function createPost({
   authorId,
   title,
   content,
-  tags = [] // this is new
+  tags = []
 }) {
   try {
     const { rows: [ post ] } = await client.query(`
