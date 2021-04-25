@@ -14,6 +14,7 @@ const {
   getPostById,
   getPostsByTagName,
   getAllTags,
+  getUserByUsername,
 
 } = require('./index');
 
@@ -86,6 +87,7 @@ async function createInitialUsers() {
     await createUser({ username: 'albert', password: 'bertie99', name: 'bert', location: 'south' });
     await createUser({ username: 'sandra', password: '2sandy4me', name: 'sand', location: 'east' });
     await createUser({ username: 'glamgal', password: 'soglam', name: 'olegal', location: 'north' });
+    await createUser({ username: 'rashonwill', password: 'shoncodes2', name: 'shon', location: 'The Boot' });
 
     console.log("Finished creating users!");
   } catch(error) {
@@ -96,7 +98,7 @@ async function createInitialUsers() {
 
 async function createInitialPosts() {
   try {
-    const [albert, sandra, glamgal] = await getAllUsers();
+    const [albert, sandra, glamgal, rashonwill] = await getAllUsers();
 
     console.log("Starting to create posts...");
     await createPost({
@@ -119,6 +121,14 @@ async function createInitialPosts() {
       content: "Do you even? I swear that half of you are posing.",
       tags: ["#happy", "#youcandoanything", "#canmandoeverything"]
     });
+
+    await createPost({
+      authorId: rashonwill.id,    
+      title: "Testing these JuiceBox Post",
+      content: "How you gon win if you aint right within?",
+      tags: ["#lyrics", "#laurynhill", "#doowop", "#happy"]
+    });
+
     console.log("Finished creating posts!");
   } catch (error) {
     console.log("Error creating posts!");
@@ -142,6 +152,7 @@ async function createInitialTags() {
     await addTagsToPost(postOne.id, [happy, inspo]);
     await addTagsToPost(postTwo.id, [sad, inspo]);
     await addTagsToPost(postThree.id, [happy, catman, inspo]);
+    await addTagsToPost(postFour.id, [lyrics, hiphop, laurynhill]);
 
     console.log("Finished creating tags!");
   } catch (error) {
